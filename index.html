@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EESS Solutions | Cameras · Fire Alarms · Security · Solar</title>
+<meta name="description" content="EESS Solutions — premium surveillance, certified fire safety, access control, and smart solar energy systems.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Sora', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+          mono: ['JetBrains Mono', 'monospace'],
+        },
+        colors: {
+          ink: '#0a0a0a',
+          charcoal: '#121212',
+          panel: '#161616',
+          cyan: { glow: '#22e3ff' },
+          fire: { glow: '#ff5b3d' },
+          solar: { glow: '#ffb830' },
+        },
+        boxShadow: {
+          'glow-cyan': '0 0 40px -8px rgba(34,227,255,0.45)',
+          'glow-fire': '0 0 40px -8px rgba(255,91,61,0.45)',
+          'glow-solar': '0 0 40px -8px rgba(255,184,48,0.45)',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --charcoal:#121212;
+    --cyan:#22e3ff;
+    --fire:#ff5b3d;
+    --solar:#ffb830;
+  }
+  *{ scroll-behavior: smooth; }
+  html,body{ background:var(--ink); }
+  body{
+    font-family:'Inter', sans-serif;
+    color:#e9e9ea;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(34,227,255,0.10), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(255,91,61,0.09), transparent 38%),
+      radial-gradient(circle at 50% 85%, rgba(255,184,48,0.08), transparent 42%),
+      var(--ink);
+    background-attachment: fixed;
+  }
+  h1,h2,h3,h4,.font-display{ font-family:'Sora', sans-serif; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  ::selection{ background: rgba(34,227,255,0.3); color:#fff; }
+
+  /* Glassmorphism */
+  .glass{
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  .glass-strong{
+    background: rgba(18,18,18,0.65);
+    border: 1px solid rgba(255,255,255,0.09);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+  }
+
+  /* Gradient headline text */
+  .grad-text{
+    background: linear-gradient(100deg, #ffffff 10%, var(--cyan) 45%, var(--solar) 75%, var(--fire) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shimmer 8s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%,100%{ background-position: 0% 50%; }
+    50%{ background-position: 100% 50%; }
+  }
+
+  /* Scanline / grid backdrop for hero */
+  .grid-overlay{
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 10%, transparent 75%);
+  }
+
+  /* Card hover glow utility */
+  .card-hover{ transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease, border-color .45s ease; }
+  .card-hover:hover{ transform: translateY(-6px); }
+
+  .card-cyan:hover{ box-shadow: 0 0 55px -12px rgba(34,227,255,0.55); border-color: rgba(34,227,255,0.5); }
+  .card-fire:hover{ box-shadow: 0 0 55px -12px rgba(255,91,61,0.55); border-color: rgba(255,91,61,0.5); }
+  .card-solar:hover{ box-shadow: 0 0 55px -12px rgba(255,184,48,0.55); border-color: rgba(255,184,48,0.5); }
+  .card-silver:hover{ box-shadow: 0 0 55px -12px rgba(200,210,220,0.4); border-color: rgba(200,210,220,0.45); }
+
+  /* Glow buttons */
+  .btn-glow-cyan{ box-shadow: 0 0 0 1px rgba(34,227,255,0.4), 0 0 30px -6px rgba(34,227,255,0.65); }
+  .btn-glow-cyan:hover{ box-shadow: 0 0 0 1px rgba(34,227,255,0.7), 0 0 46px -4px rgba(34,227,255,0.9); }
+
+  /* Nav link underline */
+  .nav-link{ position:relative; }
+  .nav-link::after{
+    content:''; position:absolute; left:0; bottom:-6px; width:0; height:1px;
+    background: linear-gradient(90deg, var(--cyan), var(--solar));
+    transition: width .3s ease;
+  }
+  .nav-link:hover::after{ width:100%; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar{ width:9px; }
+  ::-webkit-scrollbar-track{ background:var(--ink); }
+  ::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:8px; }
+  ::-webkit-scrollbar-thumb:hover{ background:#3a3a3a; }
+
+  /* Reveal on scroll */
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+
+  /* Stat ring */
+  .stat-ring{ transition: filter .4s ease; }
+  .stat-card:hover .stat-ring{ filter: drop-shadow(0 0 10px currentColor); }
+
+  /* Input focus glow */
+  .field:focus{ box-shadow: 0 0 0 3px rgba(34,227,255,0.18); border-color: rgba(34,227,255,0.55); }
+
+  select.field option{ background:#121212; color:#e9e9ea; }
+
+  /* Pulse dot */
+  .pulse-dot{ position:relative; }
+  .pulse-dot::before{
+    content:''; position:absolute; inset:-4px; border-radius:9999px;
+    border:1px solid currentColor; opacity:.6;
+    animation: pulse-ring 2.2s cubic-bezier(.2,.6,.3,1) infinite;
+  }
+  @keyframes pulse-ring{
+    0%{ transform:scale(.7); opacity:.7; }
+    80%{ transform:scale(1.9); opacity:0; }
+    100%{ opacity:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  .noise{
+    position:fixed; inset:0; pointer-events:none; opacity:.035; z-index:1;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+</style>
+</head>
+<body class="antialiased">
+<div class="noise"></div>
+
+<!-- ============ NAVBAR ============ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 mt-4">
+    <div class="glass-strong rounded-2xl px-5 sm:px-7 py-3.5 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-2.5 group">
+        <span class="relative w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-400 via-sky-500 to-orange-400 flex items-center justify-center shadow-glow-cyan">
+          <i class="fa-solid fa-shield-halved text-[13px] text-black"></i>
+        </span>
+        <span class="font-display font-bold text-lg tracking-tight text-white">EESS <span class="text-white/50 font-medium">Solutions</span></span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-9 font-medium text-sm text-white/70">
+        <a href="#home" class="nav-link hover:text-white transition-colors">Home</a>
+        <a href="#services" class="nav-link hover:text-white transition-colors">Services</a>
+        <a href="#why-us" class="nav-link hover:text-white transition-colors">Why Us</a>
+        <a href="#quote" class="nav-link hover:text-white transition-colors">Quote</a>
+        <a href="#contact" class="nav-link hover:text-white transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 text-black text-sm font-semibold px-5 py-2.5 btn-glow-cyan transition-all duration-300">
+          Get a Quote <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+        <button id="menuBtn" class="md:hidden w-10 h-10 rounded-lg grid place-items-center border border-white/10 text-white/80">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden glass-strong mt-2 rounded-2xl px-6 py-5 flex flex-col gap-4 text-white/80 font-medium">
+      <a href="#home" class="mobile-link">Home</a>
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#why-us" class="mobile-link">Why Us</a>
+      <a href="#quote" class="mobile-link">Quote</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="#contact" class="text-center rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 text-black text-sm font-semibold px-5 py-2.5 mt-1">Get a Quote</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="relative pt-44 pb-28 px-5 sm:px-8 overflow-hidden">
+  <div class="absolute inset-0 grid-overlay"></div>
+  <div class="absolute -top-20 -left-20 w-[420px] h-[420px] bg-cyan-400/15 blur-[130px] rounded-full"></div>
+  <div class="absolute top-10 right-0 w-[380px] h-[380px] bg-orange-500/15 blur-[130px] rounded-full"></div>
+  <div class="absolute bottom-0 left-1/3 w-[420px] h-[420px] bg-amber-400/10 blur-[140px] rounded-full"></div>
+
+  <div class="relative max-w-5xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs font-medium text-white/70 mono mb-8">
+      <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 pulse-dot text-cyan-400"></span>
+      Licensed &amp; Certified Systems Integrator
+    </div>
+
+    <h1 class="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl leading-[1.08] tracking-tight grad-text">
+      Smart Security.<br class="hidden sm:block"> Sustainable Power.<br class="hidden sm:block"> Total Peace of Mind.
+    </h1>
+
+    <p class="mt-7 text-white/60 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+      EESS Solutions engineers modern surveillance, certified fire safety, and smart solar energy
+      into one seamless system — built for homes, businesses, and industrial sites that demand more.
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#services" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 text-black font-semibold px-8 py-3.5 btn-glow-cyan transition-all duration-300">
+        Explore Services <i class="fa-solid fa-arrow-down text-xs"></i>
+      </a>
+      <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full glass text-white font-semibold px-8 py-3.5 hover:border-white/30 hover:bg-white/[0.06] transition-all duration-300">
+        Contact Experts <i class="fa-solid fa-headset text-xs"></i>
+      </a>
+    </div>
+
+    <div class="mt-16 grid grid-cols-3 max-w-lg mx-auto gap-6 text-left">
+      <div>
+        <p class="font-display font-bold text-2xl sm:text-3xl text-white">12<span class="text-cyan-400">+</span></p>
+        <p class="text-white/45 text-xs mt-1 mono">Years Deployed</p>
+      </div>
+      <div>
+        <p class="font-display font-bold text-2xl sm:text-3xl text-white">850<span class="text-orange-400">+</span></p>
+        <p class="text-white/45 text-xs mt-1 mono">Sites Protected</p>
+      </div>
+      <div>
+        <p class="font-display font-bold text-2xl sm:text-3xl text-white">24<span class="text-amber-400">/7</span></p>
+        <p class="text-white/45 text-xs mt-1 mono">Live Monitoring</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="relative py-28 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <p class="mono text-xs tracking-widest text-cyan-400/80 uppercase mb-3">What We Deploy</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Four Systems. One Integrated Command.</h2>
+      <p class="text-white/55 mt-4">Every installation is engineered, tested, and monitored under a single unified standard of reliability.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Card 1: Cameras -->
+      <div class="reveal card-hover card-cyan glass rounded-2xl p-7 flex flex-col">
+        <div class="w-12 h-12 rounded-xl bg-cyan-400/10 border border-cyan-400/30 grid place-items-center text-cyan-400 text-lg mb-6">
+          <i class="fa-solid fa-video"></i>
+        </div>
+        <h3 class="font-display font-semibold text-lg text-white mb-2">Surveillance &amp; Cameras</h3>
+        <p class="text-white/55 text-sm leading-relaxed flex-1">Advanced CCTV and IP camera networks with 4K clarity, night vision, and secure remote monitoring from anywhere.</p>
+        <ul class="mt-5 space-y-2 text-xs text-white/45">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> 4K / IP Camera Networks</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Cloud &amp; NVR Storage</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Mobile Remote Access</li>
+        </ul>
+        <button class="learn-more mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-400 hover:gap-3 transition-all" data-target="panel-cameras">
+          Learn More <i class="fa-solid fa-chevron-down text-[10px] chevron transition-transform"></i>
+        </button>
+        <div id="panel-cameras" class="learn-panel hidden mt-4 pt-4 border-t border-white/10 text-xs text-white/50 leading-relaxed">
+          Includes site survey, cable/PoE installation, encrypted cloud backup, and a mobile app with live push alerts on motion or tampering detection.
+        </div>
+      </div>
+
+      <!-- Card 2: Fire Alarm -->
+      <div class="reveal card-hover card-fire glass rounded-2xl p-7 flex flex-col">
+        <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-400/30 grid place-items-center text-orange-400 text-lg mb-6">
+          <i class="fa-solid fa-fire-flame-curved"></i>
+        </div>
+        <h3 class="font-display font-semibold text-lg text-white mb-2">Fire Alarm &amp; Safety</h3>
+        <p class="text-white/55 text-sm leading-relaxed flex-1">Intelligent smoke and heat detection with automated emergency alarms — certified to protect lives and property.</p>
+        <ul class="mt-5 space-y-2 text-xs text-white/45">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> Smoke &amp; Heat Sensors</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> Emergency Alarm Panels</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> Certified Compliance</li>
+        </ul>
+        <button class="learn-more mt-6 inline-flex items-center gap-2 text-sm font-semibold text-orange-400 hover:gap-3 transition-all" data-target="panel-fire">
+          Learn More <i class="fa-solid fa-chevron-down text-[10px] chevron transition-transform"></i>
+        </button>
+        <div id="panel-fire" class="learn-panel hidden mt-4 pt-4 border-t border-white/10 text-xs text-white/50 leading-relaxed">
+          Fully addressable panels, early-warning smoke detectors, and instant SMS/call escalation to your response team and local authorities.
+        </div>
+      </div>
+
+      <!-- Card 3: Access Control -->
+      <div class="reveal card-hover card-silver glass rounded-2xl p-7 flex flex-col">
+        <div class="w-12 h-12 rounded-xl bg-slate-300/10 border border-slate-300/30 grid place-items-center text-slate-200 text-lg mb-6">
+          <i class="fa-solid fa-fingerprint"></i>
+        </div>
+        <h3 class="font-display font-semibold text-lg text-white mb-2">Access Control &amp; Security</h3>
+        <p class="text-white/55 text-sm leading-relaxed flex-1">Smart locks, biometric entry systems, and perimeter security engineered to keep the wrong people out.</p>
+        <ul class="mt-5 space-y-2 text-xs text-white/45">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-slate-300"></i> Biometric &amp; Card Entry</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-slate-300"></i> Smart Lock Integration</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-slate-300"></i> Perimeter Sensors</li>
+        </ul>
+        <button class="learn-more mt-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-200 hover:gap-3 transition-all" data-target="panel-access">
+          Learn More <i class="fa-solid fa-chevron-down text-[10px] chevron transition-transform"></i>
+        </button>
+        <div id="panel-access" class="learn-panel hidden mt-4 pt-4 border-t border-white/10 text-xs text-white/50 leading-relaxed">
+          Role-based access logs, biometric and RFID entry points, and gate/perimeter intrusion sensors tied into your central monitoring hub.
+        </div>
+      </div>
+
+      <!-- Card 4: Solar -->
+      <div class="reveal card-hover card-solar glass rounded-2xl p-7 flex flex-col">
+        <div class="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/30 grid place-items-center text-amber-400 text-lg mb-6">
+          <i class="fa-solid fa-solar-panel"></i>
+        </div>
+        <h3 class="font-display font-semibold text-lg text-white mb-2">Solar Power Systems</h3>
+        <p class="text-white/55 text-sm leading-relaxed flex-1">High-efficiency solar panels, smart inverters, and battery-backed green energy setups that pay for themselves.</p>
+        <ul class="mt-5 space-y-2 text-xs text-white/45">
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> High-Efficiency Panels</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Smart Hybrid Inverters</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Battery Backup Storage</li>
+        </ul>
+        <button class="learn-more mt-6 inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:gap-3 transition-all" data-target="panel-solar">
+          Learn More <i class="fa-solid fa-chevron-down text-[10px] chevron transition-transform"></i>
+        </button>
+        <div id="panel-solar" class="learn-panel hidden mt-4 pt-4 border-t border-white/10 text-xs text-white/50 leading-relaxed">
+          Custom load assessment, mono-crystalline panel arrays, hybrid inverter setup, and optional battery storage for uninterrupted power.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE US ============ -->
+<section id="why-us" class="relative py-28 px-5 sm:px-8 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-5 gap-14 items-center">
+
+    <div class="lg:col-span-2 reveal">
+      <p class="mono text-xs tracking-widest text-orange-400/80 uppercase mb-3">Why Choose Us</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl text-white leading-tight">Engineering trust, one installation at a time.</h2>
+      <p class="text-white/55 mt-5 leading-relaxed">
+        We don't sell equipment — we design systems. Every EESS deployment is backed by
+        a certified engineering team, real-time monitoring infrastructure, and a
+        commitment to zero-compromise reliability.
+      </p>
+      <a href="#contact" class="inline-flex items-center gap-2 mt-8 text-sm font-semibold text-cyan-400">
+        Talk to our engineers <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+
+    <div class="lg:col-span-3 grid sm:grid-cols-2 gap-5">
+      <div class="stat-card reveal glass rounded-2xl p-6 hover:border-cyan-400/30 transition-colors">
+        <div class="stat-ring w-10 h-10 rounded-full border-2 border-cyan-400 text-cyan-400 grid place-items-center mb-4">
+          <i class="fa-solid fa-users-gear text-sm"></i>
+        </div>
+        <p class="font-display font-bold text-white text-lg">Experienced Team</p>
+        <p class="text-white/50 text-sm mt-1.5 leading-relaxed">Certified engineers and technicians with over a decade in the field.</p>
+      </div>
+      <div class="stat-card reveal glass rounded-2xl p-6 hover:border-orange-400/30 transition-colors">
+        <div class="stat-ring w-10 h-10 rounded-full border-2 border-orange-400 text-orange-400 grid place-items-center mb-4">
+          <i class="fa-solid fa-satellite-dish text-sm"></i>
+        </div>
+        <p class="font-display font-bold text-white text-lg">24/7 Monitoring</p>
+        <p class="text-white/50 text-sm mt-1.5 leading-relaxed">Live-manned response centers watching your systems around the clock.</p>
+      </div>
+      <div class="stat-card reveal glass rounded-2xl p-6 hover:border-amber-400/30 transition-colors">
+        <div class="stat-ring w-10 h-10 rounded-full border-2 border-amber-400 text-amber-400 grid place-items-center mb-4">
+          <i class="fa-solid fa-microchip text-sm"></i>
+        </div>
+        <p class="font-display font-bold text-white text-lg">Cutting-Edge Tech</p>
+        <p class="text-white/50 text-sm mt-1.5 leading-relaxed">Latest-gen sensors, AI analytics, and smart-grid solar hardware.</p>
+      </div>
+      <div class="stat-card reveal glass rounded-2xl p-6 hover:border-slate-300/30 transition-colors">
+        <div class="stat-ring w-10 h-10 rounded-full border-2 border-slate-300 text-slate-200 grid place-items-center mb-4">
+          <i class="fa-solid fa-drafting-compass text-sm"></i>
+        </div>
+        <p class="font-display font-bold text-white text-lg">Custom Engineering</p>
+        <p class="text-white/50 text-sm mt-1.5 leading-relaxed">Every system designed around your site, budget, and risk profile.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ QUOTE CALCULATOR ============ -->
+<section id="quote" class="relative py-28 px-5 sm:px-8 border-t border-white/5">
+  <div class="absolute inset-0 grid-overlay opacity-60"></div>
+  <div class="relative max-w-4xl mx-auto">
+    <div class="reveal text-center max-w-xl mx-auto mb-12">
+      <p class="mono text-xs tracking-widest text-amber-400/80 uppercase mb-3">Instant Estimate</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl text-white">Quick Quote Calculator</h2>
+      <p class="text-white/55 mt-4">Select your requirements and get an instant system recommendation with an estimated price range.</p>
+    </div>
+
+    <div class="reveal glass-strong rounded-3xl p-6 sm:p-10">
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div>
+          <label class="text-xs font-semibold text-white/60 mb-2 block mono uppercase tracking-wide">CCTV / Cameras</label>
+          <select id="q-cctv" class="field w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all">
+            <option value="0">None</option>
+            <option value="1">Basic — 4 Cameras</option>
+            <option value="2">Standard — 8 Cameras</option>
+            <option value="3">Advanced — 16+ Cameras</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-white/60 mb-2 block mono uppercase tracking-wide">Fire Alarm System</label>
+          <select id="q-fire" class="field w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all">
+            <option value="0">None</option>
+            <option value="1">Basic — Single Zone</option>
+            <option value="2">Standard — Multi Zone</option>
+            <option value="3">Advanced — Full Building Addressable</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-white/60 mb-2 block mono uppercase tracking-wide">Solar System</label>
+          <select id="q-solar" class="field w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none transition-all">
+            <option value="0">None</option>
+            <option value="1">3kW — Small Home</option>
+            <option value="2">6kW — Medium Home / Office</option>
+            <option value="3">12kW+ — Commercial</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="quoteResult" class="mt-8 rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+        <div>
+          <p class="text-xs text-white/40 mono uppercase tracking-wide mb-1">Estimated Range</p>
+          <p id="quotePrice" class="font-display font-bold text-2xl sm:text-3xl text-white">Select services above</p>
+          <p id="quoteNote" class="text-white/45 text-sm mt-1">Your custom recommendation will appear here.</p>
+        </div>
+        <button id="requestQuoteBtn" class="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-black font-semibold px-7 py-3.5 shadow-glow-solar hover:shadow-[0_0_46px_-4px_rgba(255,184,48,0.9)] transition-all duration-300">
+          Submit Request <i class="fa-solid fa-paper-plane text-xs"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT & FOOTER ============ -->
+<section id="contact" class="relative py-28 px-5 sm:px-8 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-5 gap-14">
+
+    <div class="lg:col-span-2 reveal">
+      <p class="mono text-xs tracking-widest text-cyan-400/80 uppercase mb-3">Get In Touch</p>
+      <h2 class="font-display font-bold text-3xl sm:text-4xl text-white leading-tight mb-6">Let's Secure Your Site.</h2>
+      <p class="text-white/55 leading-relaxed mb-8">Tell us about your property and requirements — our engineers will respond with a tailored proposal within 24 hours.</p>
+
+      <div class="space-y-5">
+        <div class="flex items-center gap-4">
+          <div class="w-11 h-11 rounded-xl bg-cyan-400/10 border border-cyan-400/25 grid place-items-center text-cyan-400"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <p class="text-xs text-white/40 mono">Phone</p>
+            <p class="text-white font-medium">+92 300 1234567</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-11 h-11 rounded-xl bg-orange-400/10 border border-orange-400/25 grid place-items-center text-orange-400"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <p class="text-xs text-white/40 mono">Email</p>
+            <p class="text-white font-medium">contact@eess-solutions.com</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-11 h-11 rounded-xl bg-amber-400/10 border border-amber-400/25 grid place-items-center text-amber-400"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <p class="text-xs text-white/40 mono">Location</p>
+            <p class="text-white font-medium">Suite 4B, Business Bay Tower, Karachi</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 mt-9">
+        <a href="#" class="w-10 h-10 rounded-full glass grid place-items-center text-white/60 hover:text-cyan-400 hover:border-cyan-400/40 transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+        <a href="#" class="w-10 h-10 rounded-full glass grid place-items-center text-white/60 hover:text-cyan-400 hover:border-cyan-400/40 transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+        <a href="#" class="w-10 h-10 rounded-full glass grid place-items-center text-white/60 hover:text-cyan-400 hover:border-cyan-400/40 transition-colors"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
+        <a href="#" class="w-10 h-10 rounded-full glass grid place-items-center text-white/60 hover:text-cyan-400 hover:border-cyan-400/40 transition-colors"><i class="fa-brands fa-whatsapp text-sm"></i></a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-3 reveal">
+      <form id="contactForm" class="glass-strong rounded-3xl p-6 sm:p-9 grid sm:grid-cols-2 gap-5">
+        <input type="hidden" id="cf-type" name="type" value="contact">
+        <div class="relative">
+          <input required type="text" id="cf-name" name="name" placeholder=" " class="field peer w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 pt-5 pb-2 text-sm text-white outline-none transition-all">
+          <label for="cf-name" class="absolute left-4 top-3.5 text-white/40 text-sm transition-all peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-[10px]">Full Name</label>
+        </div>
+        <div class="relative">
+          <input required type="email" id="cf-email" name="email" placeholder=" " class="field peer w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 pt-5 pb-2 text-sm text-white outline-none transition-all">
+          <label for="cf-email" class="absolute left-4 top-3.5 text-white/40 text-sm transition-all peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-[10px]">Email Address</label>
+        </div>
+        <div class="relative sm:col-span-2">
+          <input type="tel" id="cf-phone" name="phone" placeholder=" " class="field peer w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 pt-5 pb-2 text-sm text-white outline-none transition-all">
+          <label for="cf-phone" class="absolute left-4 top-3.5 text-white/40 text-sm transition-all peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-[10px]">Phone Number</label>
+        </div>
+        <div class="relative sm:col-span-2">
+          <textarea required id="cf-message" name="message" rows="4" placeholder=" " class="field peer w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 pt-5 pb-2 text-sm text-white outline-none transition-all resize-none"></textarea>
+          <label for="cf-message" class="absolute left-4 top-3.5 text-white/40 text-sm transition-all peer-focus:top-1.5 peer-focus:text-[10px] peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:top-1.5 peer-[:not(:placeholder-shown)]:text-[10px]">Tell us about your project</label>
+        </div>
+        <button type="submit" id="contactSubmitBtn" class="sm:col-span-2 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 text-black font-semibold px-8 py-3.5 btn-glow-cyan transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
+          <span id="contactSubmitLabel">Send Message</span> <i class="fa-solid fa-paper-plane text-xs"></i>
+        </button>
+        <p id="formConfirm" class="hidden sm:col-span-2 text-center text-sm mono"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-white/40 text-xs mono">© 2026 EESS Solutions. All rights reserved.</p>
+    <div class="flex items-center gap-6 text-xs text-white/40 mono">
+      <a href="#" class="hover:text-white/70 transition-colors">Privacy Policy</a>
+      <a href="#" class="hover:text-white/70 transition-colors">Terms of Service</a>
+      <a href="#home" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5">Back to Top <i class="fa-solid fa-arrow-up text-[10px]"></i></a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Sticky nav shadow on scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar.classList.add('drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]');
+    } else {
+      navbar.classList.remove('drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]');
+    }
+  });
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    const icon = menuBtn.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-xmark');
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.querySelector('i').classList.add('fa-bars');
+      menuBtn.querySelector('i').classList.remove('fa-xmark');
+    });
+  });
+
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId.length > 1) {
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({ top: target.offsetTop - 90, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  // Service card "Learn More" toggles
+  document.querySelectorAll('.learn-more').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.dataset.target);
+      const chevron = btn.querySelector('.chevron');
+      panel.classList.toggle('hidden');
+      chevron.classList.toggle('rotate-180');
+    });
+  });
+
+  // Scroll reveal animation
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // ===== Quote Calculator Logic =====
+  const cctvSel = document.getElementById('q-cctv');
+  const fireSel = document.getElementById('q-fire');
+  const solarSel = document.getElementById('q-solar');
+  const quotePrice = document.getElementById('quotePrice');
+  const quoteNote = document.getElementById('quoteNote');
+
+  const priceTable = {
+    cctv:  { 0: 0, 1: 450,  2: 900,   3: 1800 },
+    fire:  { 0: 0, 1: 600,  2: 1400,  3: 2900 },
+    solar: { 0: 0, 1: 3200, 2: 6500,  3: 13500 }
+  };
+
+  const labelTable = {
+    cctv:  { 1: '4-camera CCTV kit', 2: '8-camera IP network', 3: '16+ camera enterprise system' },
+    fire:  { 1: 'single-zone fire alarm', 2: 'multi-zone fire alarm', 3: 'full addressable fire system' },
+    solar: { 1: '3kW solar array', 2: '6kW solar array', 3: '12kW+ commercial solar array' }
+  };
+
+  function updateQuote() {
+    const c = parseInt(cctvSel.value);
+    const f = parseInt(fireSel.value);
+    const s = parseInt(solarSel.value);
+
+    const total = priceTable.cctv[c] + priceTable.fire[f] + priceTable.solar[s];
+
+    if (total === 0) {
+      quotePrice.textContent = 'Select services above';
+      quoteNote.textContent = 'Your custom recommendation will appear here.';
+      return;
+    }
+
+    const low = Math.round(total * 0.9);
+    const high = Math.round(total * 1.15);
+    quotePrice.textContent = `$${low.toLocaleString()} – $${high.toLocaleString()}`;
+
+    const chosen = [];
+    if (c > 0) chosen.push(labelTable.cctv[c]);
+    if (f > 0) chosen.push(labelTable.fire[f]);
+    if (s > 0) chosen.push(labelTable.solar[s]);
+    quoteNote.textContent = 'Recommended: ' + chosen.join(' + ') + '.';
+  }
+
+  [cctvSel, fireSel, solarSel].forEach(sel => sel.addEventListener('change', updateQuote));
+
+  document.getElementById('requestQuoteBtn').addEventListener('click', () => {
+    const c = cctvSel.options[cctvSel.selectedIndex].text;
+    const f = fireSel.options[fireSel.selectedIndex].text;
+    const s = solarSel.options[solarSel.selectedIndex].text;
+    if (cctvSel.value === '0' && fireSel.value === '0' && solarSel.value === '0') {
+      quoteNote.textContent = 'Please select at least one service before requesting a quote.';
+      quoteNote.classList.add('text-orange-400');
+      return;
+    }
+    window.scrollTo({ top: document.getElementById('contact').offsetTop - 90, behavior: 'smooth' });
+    const msgField = document.getElementById('cf-message');
+    msgField.value = `Quote request — CCTV: ${c} | Fire Alarm: ${f} | Solar: ${s}`;
+    msgField.dispatchEvent(new Event('input'));
+    document.getElementById('cf-type').value = 'quote';
+    setTimeout(() => document.getElementById('cf-name').focus(), 700);
+  });
+
+  // Contact / quote form submit — posts to process-form.php (PHP + MySQL backend)
+  const contactForm = document.getElementById('contactForm');
+  const formConfirm = document.getElementById('formConfirm');
+  const submitBtn = document.getElementById('contactSubmitBtn');
+  const submitLabel = document.getElementById('contactSubmitLabel');
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Sending...';
+    formConfirm.classList.add('hidden');
+
+    try {
+      const formData = new FormData(contactForm);
+      const payload = Object.fromEntries(formData.entries());
+      const response = await fetch('/api/process-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        throw new Error('Unexpected server response.');
+      }
+
+      formConfirm.classList.remove('hidden');
+
+      if (response.ok && result.success) {
+        formConfirm.textContent = result.message || 'Message received — our team will reach out shortly.';
+        formConfirm.className = 'sm:col-span-2 text-center text-sm mono text-cyan-400';
+        contactForm.reset();
+        document.getElementById('cf-type').value = 'contact';
+      } else {
+        formConfirm.textContent = result.message || 'Something went wrong. Please try again.';
+        formConfirm.className = 'sm:col-span-2 text-center text-sm mono text-orange-400';
+      }
+    } catch (err) {
+      formConfirm.classList.remove('hidden');
+      formConfirm.textContent = 'Could not reach the server. Please check your connection and try again.';
+      formConfirm.className = 'sm:col-span-2 text-center text-sm mono text-orange-400';
+    } finally {
+      submitBtn.disabled = false;
+      submitLabel.textContent = 'Send Message';
+      setTimeout(() => formConfirm.classList.add('hidden'), 8000);
+    }
+  });
+</script>
+</body>
+</html>
